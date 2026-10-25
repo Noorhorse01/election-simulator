@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="100%" height="100%" style="background:#0b1330; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="10%" r="80%">
+      <stop offset="0%" stop-color="#1e3276" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#0e1738" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#070c20" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe680"/>
+      <stop offset="50%" stop-color="#f5c542"/>
+      <stop offset="100%" stop-color="#c99818"/>
+    </linearGradient>
+    <linearGradient id="demGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f54b3"/>
+      <stop offset="100%" stop-color="#2e6fd8"/>
+    </linearGradient>
+    <linearGradient id="gopGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d63c3c"/>
+      <stop offset="100%" stop-color="#a62121"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#172454"/>
+      <stop offset="100%" stop-color="#0f193d"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="500" fill="url(#bgGlow)"/>
+
+  <!-- Subtle Grid Lines -->
+  <g stroke="#1a275a" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="240" y1="0" x2="240" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="960" y1="0" x2="960" y2="500"/>
+  </g>
+
+  <!-- Broadcast Peacock Bars -->
+  <g transform="translate(565, 36)">
+    <rect x="0" y="0" width="8" height="22" rx="4" fill="#f37021" transform="skewX(-10)"/>
+    <rect x="12" y="0" width="8" height="22" rx="4" fill="#fdb913" transform="skewX(-10)"/>
+    <rect x="24" y="0" width="8" height="22" rx="4" fill="#7ac143" transform="skewX(-10)"/>
+    <rect x="36" y="0" width="8" height="22" rx="4" fill="#00aeef" transform="skewX(-10)"/>
+    <rect x="48" y="0" width="8" height="22" rx="4" fill="#645faa" transform="skewX(-10)"/>
+    <rect x="60" y="0" width="8" height="22" rx="4" fill="#d0d0d0" transform="skewX(-10)"/>
+  </g>
+
+  <!-- Main Title -->
+  <text x="600" y="105" text-anchor="middle" font-size="44" font-weight="900" font-style="italic" fill="#eef2fb" letter-spacing="4">
+    DECISION <tspan fill="url(#goldGrad)">NIGHT</tspan>
+  </text>
+  <text x="600" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#9aa8cf" letter-spacing="3">
+    FICTIONAL CHARACTER PRESIDENTIAL ELECTION SIMULATOR &amp; LIVE NETWORK BROADCAST DESK
+  </text>
+
+  <!-- Scoreboard Left (Democrat) -->
+  <g transform="translate(100, 160)" filter="url(#shadow)">
+    <rect width="450" height="110" rx="14" fill="url(#cardGrad)" stroke="#2b3a72" stroke-width="1.5"/>
+    <rect width="8" height="110" rx="4" fill="#2e6fd8"/>
+    <!-- Avatar / Initial -->
+    <rect x="24" y="18" width="74" height="74" rx="12" fill="#0d1735" stroke="#2b3a72" stroke-width="2"/>
+    <text x="61" y="66" text-anchor="middle" font-size="34" font-weight="900" fill="#6fa3ee">L</text>
+    <!-- Info -->
+    <text x="114" y="44" font-size="12" font-weight="900" fill="#6fa3ee" letter-spacing="2">DEMOCRATIC NOMINEE</text>
+    <text x="114" y="70" font-size="22" font-weight="900" fill="#ffffff">LISA SIMPSON</text>
+    <text x="114" y="92" font-size="13" font-weight="600" fill="#9aa8cf">81,429,180 votes · 51.4%</text>
+    <!-- EV Score -->
+    <text x="515" y="75" text-anchor="end" font-size="52" font-weight="900" fill="#6fa3ee">284</text>
+  </g>
+
+  <!-- Center 270 Indicator -->
+  <g transform="translate(600, 195)">
+    <text x="0" y="0" text-anchor="middle" font-size="12" font-weight="900" fill="#f5c542" letter-spacing="1">270 TO WIN</text>
+    <text x="0" y="32" text-anchor="middle" font-size="30" fill="#f5c542">🏛</text>
+  </g>
+
+  <!-- Scoreboard Right (GOP) -->
+  <g transform="translate(650, 160)" filter="url(#shadow)">
+    <rect width="450" height="110" rx="14" fill="url(#cardGrad)" stroke="#2b3a72" stroke-width="1.5"/>
+    <rect x="442" width="8" height="110" rx="4" fill="#d63c3c"/>
+    <!-- Avatar / Initial -->
+    <rect x="352" y="18" width="74" height="74" rx="12" fill="#0d1735" stroke="#2b3a72" stroke-width="2"/>
+    <text x="389" y="66" text-anchor="middle" font-size="34" font-weight="900" fill="#ec8f8f">R</text>
+    <!-- Info -->
+    <text x="336" y="44" text-anchor="end" font-size="12" font-weight="900" fill="#ec8f8f" letter-spacing="2">REPUBLICAN NOMINEE</text>
+    <text x="336" y="70" text-anchor="end" font-size="22" font-weight="900" fill="#ffffff">RON SWANSON</text>
+    <text x="336" y="92" text-anchor="end" font-size="13" font-weight="600" fill="#9aa8cf">75,810,230 votes · 46.9%</text>
+    <!-- EV Score -->
+    <text x="35" y="75" text-anchor="start" font-size="52" font-weight="900" fill="#ec8f8f">254</text>
+  </g>
+
+  <!-- Electoral Progress Bar -->
+  <g transform="translate(100, 290)">
+    <rect width="1000" height="24" rx="12" fill="#0d1735" stroke="#2b3a72" stroke-width="1.5"/>
+    <rect width="528" height="24" rx="12" fill="url(#demGrad)"/>
+    <rect x="528" y="0" width="472" height="24" rx="0" fill="url(#gopGrad)"/>
+    <!-- Center Line 270 -->
+    <line x1="500" y1="-4" x2="500" y2="28" stroke="#f5c542" stroke-width="3"/>
+    <rect x="480" y="2" width="40" height="20" rx="4" fill="#0d1735" opacity="0.8"/>
+    <text x="500" y="16" text-anchor="middle" font-size="11" font-weight="900" fill="#ffffff">270</text>
+  </g>
+
+  <!-- Feature Tags / Highlights -->
+  <g transform="translate(100, 340)">
+    <!-- Tag 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="230" height="42" rx="8" fill="#131e45" stroke="#283768" stroke-width="1"/>
+      <circle cx="22" cy="21" r="5" fill="#f5c542"/>
+      <text x="36" y="25" font-size="13" font-weight="700" fill="#eef2fb">D3 TopoJSON 50-State Map</text>
+    </g>
+    <!-- Tag 2 -->
+    <g transform="translate(255, 0)">
+      <rect width="230" height="42" rx="8" fill="#131e45" stroke="#283768" stroke-width="1"/>
+      <circle cx="22" cy="21" r="5" fill="#2e6fd8"/>
+      <text x="36" y="25" font-size="13" font-weight="700" fill="#eef2fb">Demographic Bloc Model</text>
+    </g>
+    <!-- Tag 3 -->
+    <g transform="translate(510, 0)">
+      <rect width="230" height="42" rx="8" fill="#131e45" stroke="#283768" stroke-width="1"/>
+      <circle cx="22" cy="21" r="5" fill="#7ac143"/>
+      <text x="36" y="25" font-size="13" font-weight="700" fill="#eef2fb">Groq AI + Wiki Profiling</text>
+    </g>
+    <!-- Tag 4 -->
+    <g transform="translate(765, 0)">
+      <rect width="235" height="42" rx="8" fill="#131e45" stroke="#283768" stroke-width="1"/>
+      <circle cx="22" cy="21" r="5" fill="#e33"/>
+      <text x="36" y="25" font-size="13" font-weight="700" fill="#eef2fb">Web Audio Chimes &amp; Fanfare</text>
+    </g>
+  </g>
+
+  <!-- Lower Third Ticker Bar -->
+  <g transform="translate(0, 440)">
+    <rect width="1200" height="60" fill="#0f1b42" stroke="#f5c542" stroke-width="2"/>
+    <rect width="160" height="60" fill="#d63c3c"/>
+    <text x="80" y="36" text-anchor="middle" font-size="14" font-weight="900" font-style="italic" fill="#ffffff" letter-spacing="2">DECISION DESK</text>
+    <!-- Ticker Text -->
+    <text x="180" y="36" font-size="14" font-weight="600" fill="#ffffff">
+      ● PROJECTION: Lisa Simpson wins Pennsylvania (19 EV) in a nail-biter · Ron Swanson carries Texas and Ohio · Polls closing across Mountain West
+    </text>
+  </g>
+</svg>
