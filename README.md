@@ -34,11 +34,17 @@ Watch real-time primary delegate counts, territory straw poll results, poll clos
 
 ## 🔥 What's New in V2
 
-- 🗳️ **Full Presidential Primary Season**: Compete in multi-candidate Democratic or Republican primaries (2 to 5 contenders). Features state-by-state contest calendars, cumulative delegate counts, and contested convention scenarios.
-- 📈 **Dynamic Primary Momentum Engine**: Early victories in Iowa and New Hampshire trigger media buzz and momentum multipliers into Super Tuesday.
-- 🏝️ **Territory Delegates & Straw Polls**: Real delegate allocation and results for **Puerto Rico (PR), Guam (GU), U.S. Virgin Islands (VI), American Samoa (AS), and Northern Mariana Islands (MP)**.
-- 🏛️ **Unified Road to the White House**: Win your party's primary nomination, then advance to face the opposing party's nominee in the general election on Decision Night!
-- 🗂️ **Preserved Classic V1**: Prefer the classic 1-on-1 head-to-head general election mode? It's permanently available at [`v1.html`](https://noorhorse01.github.io/election-simulator/v1.html).
+- 🗳️ **Full Presidential Primary Season**: Compete in multi-candidate Democratic or Republican primaries with **up to 5 contenders**. Includes state-by-state contest calendars, live delegate tally meters, individual candidate color swatches, and contested convention scenarios.
+- 🏝️ **Puerto Rico & Guam Straw Polls**: Authentic nonbinding straw poll simulations!
+  - **Guam**: Pre-counted at 100% when Election Night starts (due to its real-world timezone 13 hours ahead of Eastern Time — *"Where America's Day Begins"*).
+  - **Puerto Rico**: Real-time count starts alongside Indiana & Kentucky at 6:00 PM Eastern.
+  - **Custom Map Insets**: Dedicated SVG inset cards for Guam and Puerto Rico in the lower-right Atlantic.
+  - **Sidebar Straw Poll Widget**: Live percentage tracker displaying nonbinding territorial popular votes.
+- 📉 **Campaign Suspensions & Dropouts**: Candidates who fall behind in delegates and momentum dynamically drop out and suspend their campaigns, clearing the field for presumptive nominees.
+- 🎯 **Primary Demographic Blocs (Black & Latino Matrices)**: Specialized demographic modeling for primary voters, including empirical Black (`blk`) and Latino (`lat`) electorate shares across every state, paired with distinct party factions (Progressives, Establishment, Working-Class Union, MAGA Populists, Christian Right, Suburban Moderates, Libertarians).
+- ⚡ **Interactive Primary Controls**: Fast-forward simulation with `⏭ SKIP TO END`, or march directly into November with `ELECTION NIGHT ▶`.
+- 🏆 **Nominee Victory Screen**: Cinematic convention stage overlay celebrating the primary victor's total delegates and contest wins before facing the opponent in the general election.
+- 🗂️ **Preserved Classic V1**: Prefer classic 1-on-1 head-to-head general election mode? It's permanently available at [`v1.html`](https://noorhorse01.github.io/election-simulator/v1.html).
 
 ---
 
