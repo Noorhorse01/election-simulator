@@ -44,6 +44,13 @@
     letter-spacing:2px; font-style:italic;
   }
   .year-btn.sel{border-color:var(--gold); color:var(--gold); box-shadow:0 0 18px rgba(245,197,66,.25);}
+  .mode-row{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:-14px 0 28px;}
+  .mode-btn{
+    background:var(--panel); border:2px solid var(--line); color:var(--txt);
+    font-size:13px; font-weight:800; padding:9px 18px; border-radius:8px; cursor:pointer; letter-spacing:1.5px;
+  }
+  .mode-btn.sel{border-color:var(--gold); color:var(--gold);}
+  .setup-hint{text-align:center; color:var(--dim); font-size:13px; margin-top:8px; min-height:16px;}
   .cands{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
   @media (max-width:820px){ .cands{grid-template-columns:1fr;} }
   .cand-card{
@@ -104,6 +111,50 @@
   #startBtn:disabled{filter:grayscale(1) brightness(.6); cursor:not-allowed; box-shadow:none;}
   .setup-err{color:#ff8f8f; text-align:center; margin-top:12px; font-size:14px; min-height:18px;}
   .db-hint{text-align:center; color:var(--dim); font-size:12px; margin-top:18px; line-height:1.7; max-width:760px; margin-left:auto; margin-right:auto;}
+  .field-count{color:var(--dim); font-weight:700; letter-spacing:1px;}
+  .field-list{display:flex; flex-direction:column; gap:14px;}
+  .field-empty{font-size:12px; color:var(--dim); line-height:1.6;}
+  .fc{border-top:1px solid var(--line); padding-top:14px;}
+  .fc:first-of-type{border-top:none; padding-top:0;}
+  .fc .cand-preview{min-height:0;}
+  .fc .headshot{width:80px; height:80px; font-size:30px;}
+  .fc .rm{background:none; border:1px solid var(--line); color:var(--dim); border-radius:6px; cursor:pointer; font-size:11px; padding:2px 8px; margin-left:8px; vertical-align:3px;}
+  .trait-sub{grid-column:1/-1; color:var(--gold); font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-top:6px;}
+
+  /* ---------- PRIMARY SEASON ---------- */
+  #primary{max-width:1240px; margin:0 auto; padding:10px 14px 90px;}
+  .prim-row{display:grid; grid-template-columns:2fr 1fr; gap:12px; margin-bottom:12px;}
+  .opp{display:flex; gap:12px; align-items:center;}
+  .opp .ph{width:64px; height:64px; border-radius:10px; object-fit:cover; object-position:top center; border:2px solid var(--line); background:#0d1735;
+    display:flex; align-items:center; justify-content:center; font-weight:900; font-size:24px; color:var(--dim); flex-shrink:0;}
+  .opp .nm{font-weight:900; font-size:18px; text-transform:uppercase;}
+  .opp .pty{font-size:11px; letter-spacing:2px; font-weight:700; margin-top:2px;}
+  .opp .note{font-size:12px; color:var(--dim); margin-top:6px; line-height:1.5;}
+  @media (max-width:820px){ .prim-row{grid-template-columns:1fr;} }
+  .prim-panel.dem{border-top:4px solid var(--dem);} .prim-panel.gop{border-top:4px solid var(--gop);}
+  .prim-cands{display:flex; flex-direction:column;}
+  .pc{display:grid; grid-template-columns:40px 1fr auto; gap:5px 10px; align-items:center; padding:7px 0; border-bottom:1px solid var(--line); transition:opacity .4s;}
+  .pc:last-child{border-bottom:none;}
+  .pc .ph{width:40px; height:40px; border-radius:8px; object-fit:cover; object-position:top center; border:2px solid var(--line); background:#0d1735;
+    display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--dim); grid-row:span 2;}
+  .pc .pn{font-weight:800; font-size:14px; min-width:0;}
+  .pc .pn .sw{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px;}
+  .pc .ps{font-size:10px; color:var(--dim); letter-spacing:1px; font-weight:700; margin-left:6px;}
+  .pc.nom .ps{color:var(--gold);}
+  .pc .pd{font-size:22px; font-weight:900; font-variant-numeric:tabular-nums; text-align:right; grid-row:span 2;}
+  .pc .pbar{height:6px; background:#0d1735; border-radius:3px; overflow:hidden;}
+  .pc .pbar i{display:block; height:100%; width:0; transition:width .4s;}
+  .pc.out{opacity:.4;}
+  .maplegend{flex-wrap:wrap;}
+
+  /* nominees overlay */
+  #nominees{position:fixed; inset:0; z-index:70; display:none; align-items:center; justify-content:center; background:rgba(5,9,28,.92); backdrop-filter:blur(4px); padding:16px;}
+  #nominees.show{display:flex;}
+  .nom-pair{display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin:6px 0 4px;}
+  .win-card .nom img, .win-card .nom .headshot{width:130px; height:130px; margin:0 auto;}
+  .nom .wn{font-size:26px;}
+  .nom .nd{color:var(--dim); font-size:12px; margin-top:6px;}
+  .win-card button.ghost{background:none; border:1px solid var(--line); color:var(--dim); margin-left:8px;}
 
   /* ---------- ELECTION NIGHT ---------- */
   #night{max-width:1240px; margin:0 auto; padding:10px 14px 90px;}
@@ -168,8 +219,9 @@
     padding:8px; position:relative;
   }
   #map{width:100%; height:auto; display:block;}
-  #map path.state{stroke:#0b1330; stroke-width:1; cursor:pointer; transition:fill .4s;}
-  #map path.state:hover{stroke:var(--gold); stroke-width:2;}
+  #map path.state, #pmap path.state{stroke:#0b1330; stroke-width:1; cursor:pointer; transition:fill .4s;}
+  #map path.state:hover, #pmap path.state:hover{stroke:var(--gold); stroke-width:2;}
+  #pmap{width:100%; height:auto; display:block;}
   .maplegend{display:flex; gap:16px; justify-content:center; padding:6px 0 2px; font-size:11px; color:var(--dim); letter-spacing:1px;}
   .maplegend i{display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-2px;}
   #tooltip{
@@ -188,13 +240,15 @@
     border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:10px; font-style:italic;
   }
   .dist-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
+  .dist-grid.straw{grid-template-columns:1fr;}
+  .dist .sv{flex:1; text-align:right; margin:0 8px; color:var(--dim);}
   .dist{
     background:#0d1735; border:1px solid var(--line); border-radius:8px; padding:7px 9px;
     font-size:11px; display:flex; justify-content:space-between; align-items:center; font-variant-numeric:tabular-nums;
   }
   .dist b{font-size:12px;}
   .dist .dot{width:12px; height:12px; border-radius:50%; background:var(--tossup);}
-  #callfeed{max-height:330px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;}
+  #callfeed, #primfeed{max-height:330px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;}
   .call-item{
     border-radius:8px; padding:8px 10px; font-size:12px; line-height:1.4;
     border-left:4px solid var(--tossup); background:#0d1735; animation:slidein .4s;
@@ -255,8 +309,8 @@
     background:var(--gop); color:#fff; font-weight:900; font-style:italic; letter-spacing:2px;
     padding:0 16px; height:100%; display:flex; align-items:center; font-size:13px; flex-shrink:0; z-index:2;
   }
-  .tick-track{white-space:nowrap; display:inline-block; padding-left:100%; animation:tick 45s linear infinite; font-size:14px; font-weight:600;}
-  @keyframes tick{to{transform:translateX(-100%);}}
+  .tick-view{flex:1; min-width:0; height:100%; overflow:hidden; display:flex; align-items:center;}
+  .tick-track{flex:none; white-space:nowrap; font-size:14px; font-weight:600; will-change:transform;}
   .tick-track span{margin-right:60px; color:var(--txt);}
   .tick-track span::before{content:"●"; color:var(--gold); margin-right:10px; font-size:10px; vertical-align:1px;}
 </style>
@@ -270,10 +324,20 @@
     <h1 class="decision">Decision <span id="setupYear">2028</span></h1>
   </div>
   <div class="sub">FICTIONAL CHARACTER PRESIDENTIAL ELECTION SIMULATOR — NETWORK-STYLE RETURNS</div>
+  <div style="text-align:center; margin:-14px 0 22px;">
+    <a href="./v1.html" style="display:inline-block; font-size:12px; color:var(--gold); text-decoration:none; border:1px solid var(--line); padding:4px 14px; border-radius:20px; background:rgba(22,35,79,0.7); letter-spacing:1px;">
+      🏛️ Switch to Classic V1 (General Election Only) →
+    </a>
+  </div>
 
   <div class="year-row">
     <button class="year-btn sel" data-year="2028">2028</button>
     <button class="year-btn" data-year="2024">2024</button>
+  </div>
+  <div class="mode-row">
+    <button class="mode-btn sel" data-mode="h2h">HEAD TO HEAD</button>
+    <button class="mode-btn" data-mode="D">DEMOCRATIC PRIMARY</button>
+    <button class="mode-btn" data-mode="R">REPUBLICAN PRIMARY</button>
   </div>
 
   <div class="ai-box">
@@ -293,46 +357,78 @@
 
   <div class="cands">
     <div class="cand-card dem" id="card-D">
-      <div class="party-tag">★ Democratic Nominee</div>
+      <div class="party-tag">★ <span id="tag-D">Democratic Nominee</span> <span class="field-count" id="cnt-D"></span></div>
       <div class="search-row">
         <input id="name-D" list="charlist" placeholder="e.g. Lisa Simpson, Kermit the Frog…" autocomplete="off">
-        <button onclick="fetchCandidate('D')">FIND</button>
+        <button id="add-D" onclick="fetchCandidate('D')">FIND</button>
       </div>
       <div class="fetch-note" id="note-D"></div>
-      <div class="cand-preview">
-        <div class="headshot" id="img-D">?</div>
-        <div class="cand-meta">
-          <div class="nm" id="nm-D">—</div>
-          <div class="desc" id="desc-D">Type a movie or cartoon character and hit FIND. Their photo and bio load from Wikipedia.</div>
-        </div>
-      </div>
-      <details class="traits" id="traits-D"></details>
+      <div class="field-list" id="field-D"><div class="field-empty"></div></div>
     </div>
 
     <div class="cand-card gop" id="card-R">
-      <div class="party-tag">★ Republican Nominee</div>
+      <div class="party-tag">★ <span id="tag-R">Republican Nominee</span> <span class="field-count" id="cnt-R"></span></div>
       <div class="search-row">
         <input id="name-R" list="charlist" placeholder="e.g. Scrooge McDuck, Ron Swanson…" autocomplete="off">
-        <button onclick="fetchCandidate('R')">FIND</button>
+        <button id="add-R" onclick="fetchCandidate('R')">FIND</button>
       </div>
       <div class="fetch-note" id="note-R"></div>
-      <div class="cand-preview">
-        <div class="headshot" id="img-R">?</div>
-        <div class="cand-meta">
-          <div class="nm" id="nm-R">—</div>
-          <div class="desc" id="desc-R">Type a movie or cartoon character and hit FIND. Their photo and bio load from Wikipedia.</div>
-        </div>
-      </div>
-      <details class="traits" id="traits-R"></details>
+      <div class="field-list" id="field-R"><div class="field-empty"></div></div>
     </div>
   </div>
   <datalist id="charlist"></datalist>
 
   <div class="start-row">
-    <button id="startBtn" disabled onclick="startNight()">Start Election Night ▶</button>
+    <button id="startBtn" disabled onclick="startSeason()">Start Election Night ▶</button>
+    <div class="setup-hint" id="setupHint"></div>
     <div class="setup-err" id="setupErr"></div>
   </div>
   <div class="db-hint" id="dbHint"></div>
+</div>
+
+<!-- ================= PRIMARY SEASON ================= -->
+<div id="primary" class="hidden">
+  <div class="topbar">
+    <div class="left">
+      <div class="peacock" style="transform:scale(.7); transform-origin:left center;"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <h2><span id="primTitle" style="color:inherit">Primary</span> <span id="primYear">2028</span></h2>
+    </div>
+    <div class="clock" id="primDate">PRIMARY SEASON</div>
+    <div class="ctrls">
+      <button class="speed-btn" onclick="toggleSpeed()">SPEED 1×</button>
+      <button class="mute-btn on" onclick="toggleMute()">🔊 SOUND</button>
+      <button id="primSkip" onclick="skipPrimaries()">⏭ SKIP TO END</button>
+      <button id="primGo" class="on hidden" onclick="startNight()">ELECTION NIGHT ▶</button>
+      <button onclick="location.reload()">↺ NEW RACE</button>
+    </div>
+  </div>
+
+  <div class="prim-row">
+    <div class="side-panel prim-panel" id="primPanel"><h3 id="primHead"></h3><div class="prim-cands" id="primCands"></div></div>
+    <div class="side-panel prim-panel" id="oppPanel"><h3>Waiting in November</h3><div id="oppCard"></div></div>
+  </div>
+
+  <div class="mainrow">
+    <div class="mapbox">
+      <svg id="pmap" viewBox="0 0 975 610"></svg>
+      <div class="maplegend" id="primLegend"></div>
+    </div>
+    <div class="sidecol">
+      <div class="side-panel">
+        <h3>Contest Results</h3>
+        <div id="primfeed"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="nominees">
+  <div class="win-card">
+    <div class="lbl">★ ★ ★ THE NOMINEES ★ ★ ★</div>
+    <div class="nom-pair" id="nomPair"></div>
+    <button onclick="startNight()">ON TO ELECTION NIGHT ▶</button>
+    <button class="ghost" onclick="document.getElementById('nominees').classList.remove('show')">VIEW PRIMARY MAP</button>
+  </div>
 </div>
 
 <!-- ================= ELECTION NIGHT ================= -->
@@ -344,8 +440,8 @@
     </div>
     <div class="clock" id="clock">6:00 PM ET</div>
     <div class="ctrls">
-      <button id="speedBtn" onclick="toggleSpeed()">SPEED 1×</button>
-      <button id="muteBtn" class="on" onclick="toggleMute()">🔊 SOUND</button>
+      <button class="speed-btn" onclick="toggleSpeed()">SPEED 1×</button>
+      <button class="mute-btn on" onclick="toggleMute()">🔊 SOUND</button>
       <button onclick="location.reload()">↺ NEW RACE</button>
     </div>
   </div>
@@ -397,6 +493,10 @@
         <div class="dist-grid" id="distGrid"></div>
       </div>
       <div class="side-panel">
+        <h3>Territory Straw Polls — 0 EV</h3>
+        <div class="dist-grid straw" id="strawGrid"></div>
+      </div>
+      <div class="side-panel">
         <h3>Race Calls</h3>
         <div id="callfeed"></div>
       </div>
@@ -431,7 +531,7 @@
 
 <div id="ticker">
   <div class="tag">DECISION DESK</div>
-  <div class="tick-track" id="tickTrack"><span>Polls are open across America — first results at 6 PM Eastern…</span></div>
+  <div class="tick-view"><div class="tick-track" id="tickTrack"><span>Polls are open across America — first results at 6 PM Eastern…</span></div></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -500,6 +600,25 @@ const STATES = {
   WV:{n:"West Virginia",fips:"54",evs:4, lean:-40,urb:.45,ev:.75,yth:.40,biz:.35,col:.20,uni:.60,sen:.85,reg:"S", close:19.5,votes:.8},
   WI:{n:"Wisconsin",fips:"55",evs:10,lean:0,  urb:.68,ev:.55,yth:.50,biz:.52,col:.50,uni:.70,sen:.55,reg:"MW",close:21,votes:3.3},
   WY:{n:"Wyoming",fips:"56",evs:3, lean:-45,urb:.40,ev:.55,yth:.50,biz:.55,col:.40,uni:.30,sen:.50,reg:"W", close:21,votes:.28},
+};
+
+/* =====================================================================
+   TERRITORY STRAW POLLS — nonbinding presidential votes. No electoral
+   votes and not part of the national popular vote. Same indices as
+   STATES; lean is a rough read of recent straw polls. early: share of the
+   count already in when the night starts (Guam votes ~13 hours ahead of the
+   East Coast, so it is fully in). close: when counting starts; Puerto Rico
+   is held back to start with Indiana & Kentucky's first returns, a
+   deliberate choice for the show (its real polls close at 2 PM ET).
+   inset: map box [x,y,w,h] in the open Atlantic, bottom right of the
+   975×610 map. del: approx. primary delegates (territories do send
+   delegates to the conventions).
+   ===================================================================== */
+const TERRITORIES = {
+  GU:{n:"Guam",       fips:"66",lean:8, urb:.95,ev:.20,yth:.55,biz:.45,col:.30,uni:.20,sen:.30,early:1,votes:.03,inset:[860,530,105,62],
+      del:{D:7,R:9}},
+  PR:{n:"Puerto Rico",fips:"72",lean:35,urb:.94,ev:.25,yth:.40,biz:.40,col:.35,uni:.25,sen:.65,early:0,votes:.8, inset:[860,455,105,44],
+      del:{D:55,R:23}, close:STATES.IN.close},
 };
 
 /* =====================================================================
@@ -572,15 +691,53 @@ const TRAIT_DEFS = [
   ["pop","National fame",0,1,.05],
 ];
 
+/* Primary-only traits: they decide who wins inside a party, and the
+   general-election engine ignores them. */
+const PRIMARY_TRAITS = [
+  ["est","Establishment support",0,1,.05],
+  ["grass","Grassroots energy",0,1,.05],
+  ["deb","Debate skill",0,1,.05],
+  ["fund","Fundraising",0,1,.05],
+  ["min","Black & Latino voter appeal",0,1,.05],
+];
+/* starting estimates from the general traits when no hand-tuned or AI
+   value exists; the sliders refine them */
+function primaryDefaults(p){
+  const r05=x=>Math.round(clamp(x,0,1)*20)/20;
+  return {
+    est:   r05(.25 + .35*p.biz + .25*p.pop + .1*p.cha - .3*Math.abs(p.ideo)),   // insiders back rich, famous, moderate
+    grass: r05(.2 + .45*p.yth + .3*Math.abs(p.ideo) + .2*p.rur - .25*p.biz),    // enthusiasm follows youth and conviction
+    deb:   r05(.15 + .7*p.cha + .1*p.pop),
+    fund:  r05(.1 + .6*p.biz + .3*p.pop),
+    min:   r05(.35 + .25*p.cha + .2*p.yth - .25*Math.max(0,p.ideo) - .15*p.rur),
+  };
+}
+
 /* ================= SETUP LOGIC ================= */
 let year = 2028;
-const cand = { D:null, R:null };
+const cand = { D:null, R:null };   // the two general-election nominees
+/* race type: "h2h" = one nominee per party; "D"/"R" = that party holds a
+   primary among 2–5 candidates and the winner faces the other party's nominee */
+let mode = "h2h";
+const hasPrimary = s => mode===s;
+const PARTY_NAME = { D:"Democratic", R:"Republican" };
+const MAX_FIELD = 5;
+const field = { D:[], R:[] };
+let nextCandId = 1;
+const candById = id => field.D.concat(field.R).find(c=>c.id===id);
+const esc = s => String(s).replace(/[&<>"]/g, ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
 
 document.querySelectorAll(".year-btn").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".year-btn").forEach(x=>x.classList.remove("sel"));
   b.classList.add("sel");
   year = +b.dataset.year;
   document.getElementById("setupYear").textContent = year;
+});
+document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".mode-btn").forEach(x=>x.classList.remove("sel"));
+  b.classList.add("sel");
+  mode = b.dataset.mode;
+  updateFieldUI();
 });
 
 const dl = document.getElementById("charlist");
@@ -590,7 +747,8 @@ Object.keys(CHARACTER_DB).forEach(k=>{
   if(!seen.has(CHARACTER_DB[k])){ const o=document.createElement("option"); o.value=nice; dl.appendChild(o); }
 });
 document.getElementById("dbHint").innerHTML =
-  "<b>"+Object.keys(CHARACTER_DB).length+" characters</b> have hand-tuned political profiles (ideology, business appeal, rural/religious/youth appeal, home state) based on how they behave on screen — e.g. Sheldon Cooper gets a Texas bonus, Scrooge McDuck surges in pro-business states. Any other character gets a profile automatically: AI-generated via your Groq key, or estimated from their Wikipedia bio.";
+  "<b>"+Object.keys(CHARACTER_DB).length+" characters</b> have hand-tuned political profiles (ideology, business appeal, rural/religious/youth appeal, home state) based on how they behave on screen — e.g. Sheldon Cooper gets a Texas bonus, Scrooge McDuck surges in pro-business states. Any other character gets a profile automatically: AI-generated via your Groq key, or estimated from their Wikipedia bio. " +
+  "Primary traits (establishment support, grassroots energy, debate skill, fundraising, Black &amp; Latino voter appeal) come from the AI when it's on, otherwise they start as estimates from the other traits — tune them under Details.";
 
 function initial(name){ return (name||"?").trim().charAt(0).toUpperCase() || "?"; }
 
@@ -613,6 +771,8 @@ async function aiProfile(title, extract){
     `"cha": 0-1 charisma; "biz": 0-1 appeal to pro-business voters; "rur": 0-1 appeal to rural voters;\n`+
     `"rel": 0-1 appeal to religious voters; "yth": 0-1 appeal to young voters; "pop": 0-1 fame with the American public;\n`+
     `"home": two-letter US state code the character is canonically associated with (for fictional towns use the commonly attributed state), or null;\n`+
+    `"est": 0-1 support from party insiders/establishment; "grass": 0-1 grassroots enthusiasm and outsider energy;\n`+
+    `"deb": 0-1 debate skill; "fund": 0-1 fundraising power; "min": 0-1 appeal to Black and Latino voters;\n`+
     `"why": one short sentence justifying the profile.`;
   for(const model of GROQ_MODELS){
     try{
@@ -627,12 +787,14 @@ async function aiProfile(title, extract){
       const j = await r.json();
       const p = JSON.parse(j.choices[0].message.content);
       const r1=x=>Math.round(clamp(+x||0,-1,1)*10)/10, r05=x=>Math.round(clamp(+x||0,0,1)*20)/20;
-      return {
+      const out = {
         ideo:r1(p.ideo), cha:r05(p.cha), biz:r05(p.biz), rur:r05(p.rur),
         rel:r05(p.rel), yth:r05(p.yth), pop:r05(p.pop),
         home:(typeof p.home==="string" && STATES[p.home.toUpperCase()]) ? p.home.toUpperCase() : null,
         why:(typeof p.why==="string" ? p.why.slice(0,160) : null), ai:true,
       };
+      PRIMARY_TRAITS.forEach(([k])=>{ if(typeof p[k]==="number") out[k]=r05(p[k]); });   // missing ones get defaults
+      return out;
     }catch(e){ /* network/parse error → try next model */ }
   }
   return null;
@@ -655,22 +817,68 @@ function heuristicProfile(extract){
   return p;
 }
 
-function buildTraitEditor(side, profile, srcLabel, openIt){
-  const det = document.getElementById("traits-"+side);
-  let html = `<summary>${srcLabel}</summary><div class="trait-grid">`;
-  for(const [key,label,min,max,step] of TRAIT_DEFS){
-    profile[key] = Math.round(profile[key]*100)/100;
-    html += `<div class="trait"><label><span>${label}</span><span id="tv-${side}-${key}">${profile[key]}</span></label>
-      <input type="range" min="${min}" max="${max}" step="${step}" value="${profile[key]}"
-        oninput="cand['${side}'].profile['${key}']=+this.value; document.getElementById('tv-${side}-${key}').textContent=this.value">
+function traitEditorHTML(c, srcLabel){
+  const p = c.profile;
+  const slider = ([key,label,min,max,step]) => {
+    p[key] = Math.round(p[key]*100)/100;
+    return `<div class="trait"><label><span>${label}</span><span id="tv-${c.id}-${key}">${p[key]}</span></label>
+      <input type="range" min="${min}" max="${max}" step="${step}" value="${p[key]}"
+        oninput="candById(${c.id}).profile['${key}']=+this.value; document.getElementById('tv-${c.id}-${key}').textContent=this.value">
       </div>`;
-  }
-  html += `<div class="trait"><label><span>Home state bonus</span></label><select onchange="cand['${side}'].profile.home=this.value||null">
+  };
+  return `<summary>${srcLabel}</summary><div class="trait-grid">` +
+    TRAIT_DEFS.map(slider).join("") +
+    `<div class="trait"><label><span>Home state bonus</span></label><select onchange="candById(${c.id}).profile.home=this.value||null">
     <option value="">— none —</option>` +
-    Object.keys(STATES).map(a=>`<option value="${a}" ${profile.home===a?"selected":""}>${STATES[a].n}</option>`).join("") +
-    `</select></div></div>`;
-  det.innerHTML = html;
-  if(openIt) det.open = true;
+    Object.keys(STATES).map(a=>`<option value="${a}" ${p.home===a?"selected":""}>${STATES[a].n}</option>`).join("") +
+    `</select></div>` +
+    `<div class="trait-sub">Primary traits</div>` +
+    PRIMARY_TRAITS.map(slider).join("") +
+    `</div>`;
+}
+
+function candidateEntryHTML(c, srcLabel){
+  const shot = c.thumb ? `<img class="headshot" src="${c.thumb}" alt="${esc(c.title)}">` : `<div class="headshot">${esc(initial(c.name))}</div>`;
+  return `<div class="fc" id="fc-${c.id}">
+    <div class="cand-preview">${shot}
+      <div class="cand-meta">
+        <div class="nm">${esc(c.name)}<button class="rm" onclick="removeCandidate(${c.id})">✕ remove</button></div>
+        <div class="desc">${esc((c.profile.why ? "📊 "+c.profile.why+" — " : "") + (c.extract || "No Wikipedia summary found."))}</div>
+      </div>
+    </div>
+    <details class="traits">${traitEditorHTML(c, srcLabel)}</details>
+  </div>`;
+}
+
+function updateFieldUI(){
+  ["D","R"].forEach(s=>{
+    const prim=hasPrimary(s), n=field[s].length;
+    document.getElementById("tag-"+s).textContent = PARTY_NAME[s] + (prim ? " Primary Field" : " Nominee");
+    document.getElementById("cnt-"+s).textContent = prim && n ? `(${n} of ${MAX_FIELD})` : "";
+    document.getElementById("add-"+s).textContent = prim ? "ADD" : "FIND";
+    const empty = document.querySelector(`#field-${s} .field-empty`);
+    empty.textContent = prim
+      ? "Add 2–5 movie or cartoon characters to compete in the primary. Photos and bios load from Wikipedia."
+      : "Type a movie or cartoon character and hit FIND. Their photo and bio load from Wikipedia.";
+    empty.classList.toggle("hidden", n>0);
+  });
+  // what's still missing before this race type can start
+  const need = ["D","R"].map(s=>{
+    const n=field[s].length, who=s==="D"?"Democrat":"Republican";
+    if(hasPrimary(s)) return n<2 ? `add ${2-n} more ${who}${2-n>1?"s":""} to the primary` : "";
+    return !n ? `pick the ${PARTY_NAME[s]} nominee` : n>1 ? `remove ${n-1} ${who}${n-1>1?"s":""} (one nominee per party here)` : "";
+  }).filter(Boolean);
+  const btn = document.getElementById("startBtn");
+  btn.disabled = need.length>0;
+  btn.textContent = mode==="h2h" ? "Start Election Night ▶" : `Start ${PARTY_NAME[mode]} Primary ▶`;
+  document.getElementById("setupHint").textContent = need.length ? "To start: "+need.join(" and ")+"." : "";
+}
+
+function removeCandidate(id){
+  field.D = field.D.filter(c=>c.id!==id);
+  field.R = field.R.filter(c=>c.id!==id);
+  document.getElementById("fc-"+id).remove();
+  updateFieldUI();
 }
 
 async function fetchCandidate(side){
@@ -680,6 +888,8 @@ async function fetchCandidate(side){
   err.textContent = "";
   if(!name){ note.textContent="Type a character name first."; return; }
   if(BLOCKLIST.some(rx=>rx.test(name))){ note.textContent="⛔ That one's off the ballot. Pick a non-offensive character."; return; }
+  if(hasPrimary(side) && field[side].length>=MAX_FIELD){ note.textContent=`A primary holds up to ${MAX_FIELD} candidates — remove one first.`; return; }
+  if(!hasPrimary(side) && field[side].length>1){ note.textContent="This party has one nominee here — remove candidates until one is left, or pick a primary above."; return; }
   note.textContent = "Searching Wikipedia…";
 
   let title=name, extract="", thumb=null;
@@ -699,6 +909,13 @@ async function fetchCandidate(side){
     note.textContent = thumb ? "✓ Photo & bio loaded from Wikipedia" : "No photo found on Wikipedia — using a monogram. You can still run them.";
   }catch(e){
     note.textContent = "⚠ Wikipedia unreachable — running with a monogram avatar.";
+  }
+
+  const dup = field.D.concat(field.R).find(c=>
+    c.name.toLowerCase()===name.toLowerCase() || c.title.toLowerCase()===title.toLowerCase());
+  if(dup){
+    note.textContent = `${dup.name} is already running as a ${field.D.includes(dup) ? "Democrat" : "Republican"}.`;
+    return;
   }
 
   const dbKey = Object.keys(CHARACTER_DB).find(k=> k===name.toLowerCase() || k===title.toLowerCase());
@@ -727,21 +944,26 @@ async function fetchCandidate(side){
       base.ai ? " · ✨ AI profile ready" : " · profile estimated");
   }
 
-  cand[side] = { name, title, extract, thumb, profile:{...base} };
+  const c = { id:nextCandId++, name, title, extract, thumb, profile:{...primaryDefaults(base), ...base} };
+  if(!hasPrimary(side) && field[side].length) removeCandidate(field[side][0].id);   // FIND replaces the nominee
+  field[side].push(c);
+  document.getElementById("field-"+side).insertAdjacentHTML("beforeend", candidateEntryHTML(c, srcLabel));
+  if(openIt) document.querySelector(`#fc-${c.id} details`).open = true;
+  document.getElementById("name-"+side).value = "";
+  updateFieldUI();
+}
 
-  const imgBox = document.getElementById("img-"+side);
-  if(thumb){ imgBox.outerHTML = `<img class="headshot" id="img-${side}" src="${thumb}" alt="${title}">`; }
-  else{ imgBox.outerHTML = `<div class="headshot" id="img-${side}">${initial(name)}</div>`; }
-  document.getElementById("nm-"+side).textContent = name;
-  document.getElementById("desc-"+side).textContent =
-    (base.why ? "📊 "+base.why+" — " : "") + (extract || "No Wikipedia summary found.");
-  buildTraitEditor(side, base, srcLabel, openIt);
-
-  document.getElementById("startBtn").disabled = !(cand.D && cand.R);
+function startSeason(){
+  if(document.getElementById("startBtn").disabled) return;
+  if(mode==="h2h"){
+    cand.D = field.D[0]; cand.R = field.R[0];
+    startNight();
+  }else startPrimaries();
 }
 ["D","R"].forEach(s=>{
   document.getElementById("name-"+s).addEventListener("keydown",e=>{ if(e.key==="Enter") fetchCandidate(s); });
 });
+updateFieldUI();
 
 /* ================= SIMULATION ================= */
 function gauss(mu=0, sd=1){
@@ -799,47 +1021,53 @@ function simulate(){
   const D=cand.D.profile, R=cand.R.profile;
   const env = 8*(D.cha-R.cha) + 5*(D.pop-R.pop) + gauss(0,6);          // national mood, + = Dem
   const regSwing = {NE:gauss(0,2.5), S:gauss(0,2.5), MW:gauss(0,2.5), W:gauss(0,2.5)};
-  const results={};
+  const results={}, straw={};
   for(const [ab,st] of Object.entries(STATES)){
-    // bloc composition of this state's electorate
-    const blocs = Object.entries(BLOCS).map(([k,b])=>({k, raw:Math.max(.02, b.share(st))}));
-    const totRaw = blocs.reduce((a,b)=>a+b.raw,0);
-    let effTot = 0;
-    blocs.forEach(b=>{
-      b.share   = b.raw/totRaw;
-      b.swing   = BLOCS[b.k].swing(D,R);
-      b.turnout = 1 + TURNOUT_BOOST*clamp(Math.abs(b.swing)/8,0,1);   // energized blocs vote more
-      effTot   += b.share*b.turnout;
-    });
-    // anchor: neutral candidates reproduce the state's real partisan lean
-    const resid = st.lean - blocs.reduce((a,b)=>a+b.share*BLOCS[b.k].lean,0);
-    let m = resid + env + regSwing[st.reg] + gauss(0,3);
-    const drivers=[];
-    blocs.forEach(b=>{
-      const w = b.share*b.turnout/effTot;                              // turnout-weighted share
-      m += w*BLOCS[b.k].lean + w*SWING_SCALE*b.swing;
-      drivers.push({label:BLOCS[b.k].label, pts:w*SWING_SCALE*b.swing, share:b.share});
-    });
-    if(D.home===ab) m+=12;
-    if(R.home===ab) m-=12;
-    m = clamp(m,-95,95);
-    drivers.sort((a,b)=>Math.abs(b.pts)-Math.abs(a.pts));
-    const third = 1.5+Math.random()*2;
-    const districts = (st.districts||[]).map(d=>{
-      const dm = clamp(m + d.off + gauss(0,2), -95, 95);
+    const r = simulateArea(ab, st, D, R, env + regSwing[st.reg]);
+    r.districts = (st.districts||[]).map(d=>{
+      const dm = clamp(r.margin + d.off + gauss(0,2), -95, 95);
       return {id:d.id, margin:dm, winner: dm>0?"D":"R"};
     });
-    results[ab] = {
-      margin:m, third,
-      winner: m>0?"D":"R",
-      drivers: drivers.slice(0,3),     // biggest candidate-driven bloc effects
-      turnoutMod: effTot,              // >1 when the race energizes big blocs
-      earlySkew: gauss(0, 6),          // mail/early vote skew that fades as count completes
-      speed: .5+Math.random()*.9,      // how fast the state counts
-      districts,
-    };
+    results[ab] = r;
   }
-  return {env, results};
+  // territories swing on their own, not with any mainland region
+  for(const [ab,st] of Object.entries(TERRITORIES)) straw[ab] = simulateArea(ab, st, D, R, env + gauss(0,4));
+  return {env, results, straw};
+}
+
+function simulateArea(ab, st, D, R, swing){
+  // bloc composition of this area's electorate
+  const blocs = Object.entries(BLOCS).map(([k,b])=>({k, raw:Math.max(.02, b.share(st))}));
+  const totRaw = blocs.reduce((a,b)=>a+b.raw,0);
+  let effTot = 0;
+  blocs.forEach(b=>{
+    b.share   = b.raw/totRaw;
+    b.swing   = BLOCS[b.k].swing(D,R);
+    b.turnout = 1 + TURNOUT_BOOST*clamp(Math.abs(b.swing)/8,0,1);   // energized blocs vote more
+    effTot   += b.share*b.turnout;
+  });
+  // anchor: neutral candidates reproduce the state's real partisan lean
+  const resid = st.lean - blocs.reduce((a,b)=>a+b.share*BLOCS[b.k].lean,0);
+  let m = resid + swing + gauss(0,3);
+  const drivers=[];
+  blocs.forEach(b=>{
+    const w = b.share*b.turnout/effTot;                              // turnout-weighted share
+    m += w*BLOCS[b.k].lean + w*SWING_SCALE*b.swing;
+    drivers.push({label:BLOCS[b.k].label, pts:w*SWING_SCALE*b.swing, share:b.share});
+  });
+  if(D.home===ab) m+=12;
+  if(R.home===ab) m-=12;
+  m = clamp(m,-95,95);
+  drivers.sort((a,b)=>Math.abs(b.pts)-Math.abs(a.pts));
+  const third = 1.5+Math.random()*2;
+  return {
+    margin:m, third,
+    winner: m>0?"D":"R",
+    drivers: drivers.slice(0,3),     // biggest candidate-driven bloc effects
+    turnoutMod: effTot,              // >1 when the race energizes big blocs
+    earlySkew: gauss(0, 6),          // mail/early vote skew that fades as count completes
+    speed: .5+Math.random()*.9,      // how fast the state counts
+  };
 }
 
 /* call threshold: bigger margins get called earlier */
@@ -869,8 +1097,11 @@ function startNight(){
   }
   sim = simulate();
   for(const ab in STATES) reporting[ab]=0;
+  for(const ab in TERRITORIES) reporting[ab]=TERRITORIES[ab].early;
 
   document.getElementById("setup").classList.add("hidden");
+  document.getElementById("primary").classList.add("hidden");
+  document.getElementById("nominees").classList.remove("show");
   document.getElementById("night").classList.remove("hidden");
   document.getElementById("nightYear").textContent = year;
 
@@ -891,6 +1122,12 @@ function startNight(){
         `<div class="dist"><b>${d.id}</b><span>1 EV</span><span class="dot" id="dot-${d.id}"></span></div>`);
     });
   });
+  const sg=document.getElementById("strawGrid");
+  sg.innerHTML="";
+  for(const [ab,st] of Object.entries(TERRITORIES)){
+    sg.insertAdjacentHTML("beforeend",
+      `<div class="dist"><b>${st.n}</b><span class="sv" id="straw-${ab}"></span><span class="dot" id="dot-${ab}"></span></div>`);
+  }
 
   initAudio();
   drawMap().then(()=>{
@@ -900,27 +1137,56 @@ function startNight(){
   });
 }
 
-let mapPaths=null;
-async function drawMap(){
-  const us = await (await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json")).json();
+let mapPaths=null, atlas=null;
+function loadAtlas(){   // fetched once, shared by the primary and general-election maps
+  if(!atlas) atlas = Promise.all([
+    fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json").then(r=>r.json()),
+    // unprojected atlas: the only us-atlas file that includes the territories
+    fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(r=>r.json()).catch(()=>null),
+  ]);
+  return atlas;
+}
+async function drawMap(){ mapPaths = await drawUSMap("#map", showTip, " · 0 EV"); }
+async function drawUSMap(svgId, tipFn, insetNote=""){
+  const [us, usRaw] = await loadAtlas();
   const feats = topojson.feature(us, us.objects.states).features;
   const path = d3.geoPath();
   const byFips = {}; for(const ab in STATES) byFips[STATES[ab].fips]=ab;
-  const svg = d3.select("#map");
-  mapPaths = svg.append("g").selectAll("path")
+  const svg = d3.select(svgId);
+  svg.append("g").selectAll("path")
     .data(feats.filter(f=>byFips[f.id]))
     .join("path")
     .attr("class","state").attr("d",path)
     .attr("fill","var(--tossup)")
     .attr("data-ab",f=>byFips[f.id])
-    .on("mousemove",(e,f)=>showTip(e,byFips[f.id]))
+    .on("mousemove",(e,f)=>tipFn(e,byFips[f.id]))
     .on("mouseleave",()=>document.getElementById("tooltip").style.display="none");
   svg.append("path").attr("d", path(topojson.mesh(us, us.objects.states,(a,b)=>a!==b)))
     .attr("fill","none").attr("stroke","#0b1330").attr("stroke-width",1);
+
+  // territory insets: each scaled to its own box, dashed frame (insetNote adds "· 0 EV" on the general map)
+  const terr = usRaw ? topojson.feature(usRaw, usRaw.objects.states).features : [];
+  for(const [ab,st] of Object.entries(TERRITORIES)){
+    const f = terr.find(t=>t.id===st.fips);
+    if(!f) continue;
+    const [x,y,w,h] = st.inset;
+    const g = svg.append("g");
+    g.append("rect").attr("x",x).attr("y",y).attr("width",w).attr("height",h).attr("rx",4)
+      .attr("fill","none").attr("stroke","var(--line)").attr("stroke-dasharray","3 3");
+    g.append("text").attr("x",x).attr("y",y-5).attr("fill","var(--dim)").attr("font-size",8.5)
+      .text(st.n.toUpperCase()+insetNote);
+    g.append("path").datum(f)
+      .attr("class","state").attr("d", d3.geoPath(d3.geoMercator().fitExtent([[x+6,y+6],[x+w-6,y+h-6]], f)))
+      .attr("fill","var(--tossup)")
+      .attr("data-ab",ab)
+      .on("mousemove",e=>tipFn(e,ab))
+      .on("mouseleave",()=>document.getElementById("tooltip").style.display="none");
+  }
+  return svg.selectAll("path.state");
 }
 
 function stateFill(ab){
-  const r=sim.results[ab], pct=reporting[ab];
+  const r=sim.results[ab]||sim.straw[ab], pct=reporting[ab];
   if(called.has(ab)) return r.winner==="D"?"var(--dem)":"var(--gop)";
   if(pct<=0.005) return "var(--tossup)";
   const lead = displayedMargin(ab);
@@ -930,25 +1196,27 @@ function stateFill(ab){
 
 /* margin as displayed with the early-vote skew decaying as count completes */
 function displayedMargin(ab){
-  const r=sim.results[ab];
+  const r=sim.results[ab]||sim.straw[ab];
   return r.margin + r.earlySkew*(1-reporting[ab]);
 }
 function displayedShares(ab){
-  const r=sim.results[ab], m=displayedMargin(ab);
+  const r=sim.results[ab]||sim.straw[ab], m=displayedMargin(ab);
   const d=(100-r.third)/2+m/2, rr=(100-r.third)/2-m/2;
   return {d:Math.max(0,d), r:Math.max(0,rr)};
 }
 
 function showTip(e,ab){
-  const st=STATES[ab], r=sim.results[ab], sh=displayedShares(ab), pct=reporting[ab];
+  const terr=TERRITORIES[ab], st=STATES[ab]||terr, r=sim.results[ab]||sim.straw[ab], sh=displayedShares(ab), pct=reporting[ab];
   const tot=st.votes*1e6*r.turnoutMod*pct;
   const tip=document.getElementById("tooltip");
-  const row=(nm,p,v,win,col)=>`<div class="tr"><span style="color:${col};font-weight:700">${win?"✓ ":""}${nm}</span><span>${p.toFixed(1)}% · ${fmt(Math.round(v))}</span></div>`;
-  const driverLine = r.drivers
+  // nothing counted yet: show no shares or exit-poll drivers, which would leak the final result
+  const counted = pct>0;
+  const row=(nm,p,v,win,col)=>`<div class="tr"><span style="color:${col};font-weight:700">${win?"✓ ":""}${nm}</span><span>${counted ? p.toFixed(1)+"% · "+fmt(Math.round(v)) : "—"}</span></div>`;
+  const driverLine = !counted ? "" : r.drivers
     .filter(d=>Math.abs(d.pts)>=.4)
     .map(d=>`${d.pts>0?cand.D.name:cand.R.name} +${Math.abs(d.pts).toFixed(1)} with ${d.label}`)
     .join(" · ");
-  tip.innerHTML = `<h4>${st.n} — ${st.evs + (st.districts?st.districts.length:0)} EV</h4>` +
+  tip.innerHTML = `<h4>${st.n} — ${terr ? "straw poll · 0 EV" : (st.evs + (st.districts?st.districts.length:0))+" EV"}</h4>` +
     row(cand.D.name, sh.d, tot*sh.d/100, called.has(ab)&&r.winner==="D", "var(--dem-lt)") +
     row(cand.R.name, sh.r, tot*sh.r/100, called.has(ab)&&r.winner==="R", "var(--gop-lt)") +
     (driverLine ? `<div class="rep">📊 ${driverLine}</div>` : "") +
@@ -959,7 +1227,7 @@ function showTip(e,ab){
 }
 
 function loop(now){
-  const dt=(now-lastTick)/1000; lastTick=now;
+  const dt=Math.max(0,(now-lastTick)/1000); lastTick=now;   // first rAF stamp can predate lastTick
   if(!winnerDeclared || ev.D+ev.R<538) simClock += dt*speed/HOUR_SECONDS;
   document.getElementById("clock").textContent = timeStr(Math.min(simClock,26));
 
@@ -974,12 +1242,19 @@ function loop(now){
       if(!calledDistricts.has(d.id) && reporting[ab]>=callThreshold(d.margin)) callDistrict(ab,d);
     });
   });
+  // territory straw polls count from their close (Guam: already in), carry no EVs
+  for(const [ab,st] of Object.entries(TERRITORIES)){
+    if(simClock >= (st.close||0)) reporting[ab] = Math.min(1, reporting[ab] + dt*speed*sim.straw[ab].speed*0.09);
+    if(!called.has(ab) && reporting[ab] >= callThreshold(sim.straw[ab].margin)) callStraw(ab);
+  }
+  updateStraw();
 
   updateBoard();
   if(mapPaths) mapPaths.attr("fill", f=>stateFill(mapAb(f)));
   timer=requestAnimationFrame(loop); // keep clock/tooltips alive after the count finishes
 }
 const _fipsToAb={}; for(const ab in STATES) _fipsToAb[STATES[ab].fips]=ab;
+for(const ab in TERRITORIES) _fipsToAb[TERRITORIES[ab].fips]=ab;
 const mapAb = f => _fipsToAb[f.id];
 
 function evOf(side){ return ev[side]; }
@@ -1013,6 +1288,23 @@ function callDistrict(ab,d){
   if(dot) dot.style.background = d.winner==="D"?"var(--dem)":"var(--gop)";
   pushCall(d.id+" (district)",1,{winner:d.winner,margin:d.margin});
   checkWinner();
+}
+/* straw polls get a feed entry and ticker line, but no EV projection banner */
+function callStraw(ab){
+  called.add(ab);
+  const r=sim.straw[ab], st=TERRITORIES[ab], who = r.winner==="D"?cand.D:cand.R;
+  document.getElementById("callfeed").insertAdjacentHTML("afterbegin",
+    `<div class="call-item ${r.winner==="D"?"dem":"gop"}"><b>${st.n} straw poll — ${who.name}</b>
+     <span class="t">${timeStr(simClock)} · 0 EV (nonbinding) · margin ${Math.abs(r.margin).toFixed(1)} pts</span></div>`);
+  document.getElementById("dot-"+ab).style.background = r.winner==="D"?"var(--dem)":"var(--gop)";
+  ticker(`STRAW POLL: ${who.name} wins ${st.n}'s nonbinding presidential straw poll by ${Math.abs(r.margin).toFixed(1)} pts — no electoral votes at stake.`);
+}
+function updateStraw(){
+  for(const ab in TERRITORIES){
+    const sh=displayedShares(ab);
+    document.getElementById("straw-"+ab).textContent =
+      `D ${sh.d.toFixed(1)}% · R ${sh.r.toFixed(1)}% · ${(reporting[ab]*100).toFixed(0)}% in`;
+  }
 }
 function pushCall(label, evs, r, ab){
   const who = r.winner==="D"?cand.D:cand.R;
@@ -1071,12 +1363,52 @@ function checkWinner(){
 }
 
 /* ================= COMMENTARY ================= */
-const tickerLines=[];
+/* Ticker: one continuous strip. New headlines join the end and scroll in
+   from the right edge; headlines that have scrolled off the left are dropped
+   with x shifted to match, so nothing on screen ever jumps. When the strip
+   runs dry the latest headlines replay. The scroll is a Web Animation with
+   pixel keyframes: smooth in Safari and unaffected by the busy night loop. */
+const TICK_SPEED = 90;   // px per second
+const tickerLines=[];    // latest headlines, newest first, replayed when idle
+const tickerQueue=[];    // headlines waiting to join the strip
+let tickAnim=null, tickFrom=0;
 function ticker(line){
   tickerLines.unshift(line);
   if(tickerLines.length>8) tickerLines.pop();
-  document.getElementById("tickTrack").innerHTML = tickerLines.map(l=>`<span>${l}</span>`).join("");
+  tickerQueue.push(line);
+  if(tickerQueue.length>4) tickerQueue.shift();   // on a busy night, skip the stalest
+  tickUpdate();
 }
+function tickUpdate(){
+  const track=document.getElementById("tickTrack"), view=track.parentElement, vw=view.clientWidth;
+  let x = tickAnim ? tickFrom - (tickAnim.currentTime||0)*TICK_SPEED/1000 : vw;
+  let changed = !tickAnim;
+  // drop headlines fully past the left edge
+  while(track.firstElementChild){
+    const first=track.firstElementChild, next=first.nextElementSibling;
+    const w = next ? next.offsetLeft-first.offsetLeft : track.offsetWidth;
+    if(x+w > 0) break;
+    first.remove(); x += w; changed=true;
+  }
+  if(!track.firstElementChild){
+    x = vw; changed = true;
+    if(!tickerQueue.length) tickerLines.forEach(l=>track.insertAdjacentHTML("beforeend",`<span>${l}</span>`));
+  }
+  // a waiting headline joins once the end of the strip is on screen, padded to start at the right edge
+  while(tickerQueue.length && x+track.offsetWidth <= vw){
+    const gap = vw-(x+track.offsetWidth);
+    track.insertAdjacentHTML("beforeend",`<span style="padding-left:${gap}px">${tickerQueue.shift()}</span>`);
+    changed = true;
+  }
+  if(!changed) return;
+  if(tickAnim) tickAnim.cancel();
+  const to = -track.offsetWidth;
+  tickFrom = x;
+  tickAnim = track.animate([{transform:`translateX(${x}px)`},{transform:`translateX(${to}px)`}],
+    {duration:Math.max(1,x-to)/TICK_SPEED*1000, easing:"linear", fill:"forwards"});
+}
+setInterval(tickUpdate, 250);
+{ const t=document.getElementById("tickTrack"), first=t.textContent; t.innerHTML=""; ticker(first); }
 function callLine(label, name, r){
   const a=Math.abs(r.margin);
   const strength = a>20?"in a landslide":a>10?"comfortably":a>4?"by a solid margin":"in a nail-biter";
@@ -1104,7 +1436,23 @@ function kornacki(ab){
 
 /* ================= AUDIO (synth, no files) ================= */
 let actx=null;
-function initAudio(){ try{ actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+function initAudio(){
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    unlockAudio();
+  }catch(e){}
+}
+/* Safari can leave a new AudioContext suspended (or later "interrupted")
+   even when it was created on a click. Resuming it and starting a silent
+   buffer inside a user gesture unlocks it; any later click or key press
+   does the same if Safari has paused it again. */
+function unlockAudio(){
+  if(!actx || actx.state==="running") return;
+  actx.resume();
+  const s=actx.createBufferSource(); s.buffer=actx.createBuffer(1,1,22050);
+  s.connect(actx.destination); s.start(0);
+}
+["pointerdown","keydown"].forEach(ev=>document.addEventListener(ev, unlockAudio));
 function tone(f, t0, dur, vol=0.12, type="triangle"){
   if(!actx||muted) return;
   const o=actx.createOscillator(), g=actx.createGain();
@@ -1123,17 +1471,395 @@ function fanfare(){
   [[261,0],[329,.12],[392,.24],[523,.4]].forEach(([f,t])=>tone(f,t,1.1,.08,"sawtooth"));
 }
 
+/* =====================================================================
+   PRIMARIES — DATA
+   Approx. Black and Latino population shares (Census, rounded); the
+   Democratic primary blocs need them and the general-election data
+   doesn't carry them.
+   ===================================================================== */
+const DEMOG = {
+  AL:[.26,.05], AK:[.03,.07], AZ:[.05,.32], AR:[.15,.08], CA:[.06,.40], CO:[.04,.22], CT:[.11,.17],
+  DE:[.22,.10], DC:[.44,.11], FL:[.15,.27], GA:[.31,.10], HI:[.02,.11], ID:[.01,.13], IL:[.14,.18],
+  IN:[.10,.08], IA:[.04,.07], KS:[.06,.13], KY:[.08,.04], LA:[.32,.07], ME:[.02,.02], MD:[.30,.11],
+  MA:[.07,.13], MI:[.14,.06], MN:[.07,.06], MS:[.37,.03], MO:[.11,.05], MT:[.01,.04], NE:[.05,.12],
+  NV:[.10,.30], NH:[.02,.05], NJ:[.13,.22], NM:[.02,.50], NY:[.15,.20], NC:[.21,.11], ND:[.03,.04],
+  OH:[.12,.05], OK:[.07,.11], OR:[.02,.14], PA:[.11,.09], RI:[.06,.17], SC:[.26,.07], SD:[.02,.05],
+  TN:[.16,.07], TX:[.12,.40], UT:[.01,.15], VT:[.01,.02], VA:[.19,.11], WA:[.04,.14], WV:[.04,.02],
+  WI:[.06,.08], WY:[.01,.10], PR:[.08,.98], GU:[.01,.00],
+};
+
+/* Simplified calendar modeled on recent cycles; every state, D.C.,
+   Puerto Rico and Guam votes once. */
+const PRIMARY_CALENDAR = [
+  {date:"Jan 15", label:"Iowa Caucuses",          states:["IA"]},
+  {date:"Jan 23", label:"New Hampshire Primary",  states:["NH"]},
+  {date:"Feb 6",  label:"Nevada",                 states:["NV"]},
+  {date:"Feb 24", label:"South Carolina",         states:["SC"]},
+  {date:"Feb 27", label:"Michigan",               states:["MI"]},
+  {date:"Mar 5",  label:"Super Tuesday",          states:["AL","AK","AR","CA","CO","ME","MA","MN","NC","OK","TN","TX","UT","VT","VA"]},
+  {date:"Mar 12", label:"Georgia, Mississippi, Washington & Hawaii", states:["GA","MS","WA","HI"]},
+  {date:"Mar 19", label:"Arizona, Florida, Illinois, Kansas & Ohio", states:["AZ","FL","IL","KS","OH"]},
+  {date:"Mar 23", label:"Louisiana, Missouri & North Dakota",        states:["LA","MO","ND"]},
+  {date:"Apr 2",  label:"Northeast & Wisconsin",  states:["CT","DE","NY","RI","WI"]},
+  {date:"Apr 23", label:"Pennsylvania & Wyoming", states:["PA","WY"]},
+  {date:"May 7",  label:"Indiana",                states:["IN"]},
+  {date:"May 14", label:"Maryland, Nebraska & West Virginia", states:["MD","NE","WV"]},
+  {date:"May 21", label:"Kentucky, Oregon & Idaho", states:["KY","OR","ID"]},
+  {date:"Jun 2",  label:"Puerto Rico & Guam",     states:["PR","GU"]},
+  {date:"Jun 4",  label:"Final Primaries",        states:["MT","NJ","NM","SD","DC"]},
+];
+const CAUCUS = new Set(["IA","AK","HI","ND","WY","GU"]);   // caucuses reward organizing and enthusiasm
+
+/* =====================================================================
+   PRIMARY VOTER BLOCS — each party's primary electorate split into six
+   blocs from a state's demographics. Every bloc has an ideal ideology
+   (with how much it cares: w) and a pull toward particular traits.
+   ===================================================================== */
+const PRIMARY_BLOCS = {
+  D:{
+    progressives:{label:"progressives",          share:s=>s.urb*s.col*.7 + s.yth*.3, ideal:-.8, w:2.5, pull:p=>1.5*p.grass + p.yth},
+    moderates:   {label:"moderate suburbanites", share:s=>s.col*.6 + s.sen*.3,       ideal:-.2, w:2,   pull:p=>1.5*p.est + p.deb + .8*p.cha},
+    black:       {label:"Black voters",          share:s=>s.blk*2.2,                 ideal:-.3, w:1.2, pull:p=>2.5*p.min + 1.2*p.est + .5*p.rel},
+    latino:      {label:"Latino voters",         share:s=>s.lat*1.4,                 ideal:-.3, w:1.2, pull:p=>2*p.min + .8*p.cha + .6*p.yth},
+    labor:       {label:"union households",      share:s=>s.uni*(1-s.col)*.8,        ideal:-.2, w:1.5, pull:p=>1.2*p.rur + p.cha - p.biz + .6*p.grass},
+    youth:       {label:"young voters",          share:s=>s.yth*.6,                  ideal:-.6, w:1.5, pull:p=>2.2*p.yth + p.grass},
+  },
+  R:{
+    evangelicals:{label:"evangelicals",           share:s=>s.ev*1.1,                 ideal:.7, w:2,   pull:p=>2.5*p.rel},
+    populists:   {label:"rural populists",        share:s=>(1-s.urb)*1.1,            ideal:.6, w:1.5, pull:p=>1.8*p.rur + 1.5*p.grass + .8*p.cha - .6*p.est},
+    business:    {label:"business conservatives", share:s=>s.biz*s.col,              ideal:.4, w:1.5, pull:p=>2*p.biz + 1.5*p.est + .8*p.fund},
+    moderates:   {label:"suburban moderates",     share:s=>s.urb*s.col*.7,           ideal:.1, w:2,   pull:p=>1.2*p.deb + p.cha + .8*p.est},
+    libertarians:{label:"young libertarians",     share:s=>s.yth*.4,                 ideal:.5, w:1,   pull:p=>1.8*p.yth + 1.2*p.grass},
+    seniors:     {label:"seniors",                share:s=>s.sen*.8,                 ideal:.5, w:1.2, pull:p=>1.2*p.pop + p.est + .8*p.deb},
+  },
+};
+const PRIMARY_TEMP = .8;    // how decisively bloc preferences turn into votes
+
+const totalEV = ab => STATES[ab] ? STATES[ab].evs + (STATES[ab].districts ? STATES[ab].districts.length : 0) : 0;
+const primState = ab => ({...(STATES[ab]||TERRITORIES[ab]), blk:DEMOG[ab][0], lat:DEMOG[ab][1]});
+/* delegates scale with electoral votes (about 3,800 Democratic, 2,450
+   Republican); the territories get fixed slates */
+function primDelegates(party, ab){
+  const t = TERRITORIES[ab];
+  return t ? t.del[party] : Math.round(totalEV(ab) * (party==="D" ? 7 : 4.5));
+}
+
+/* ================= PRIMARIES — ENGINE ================= */
+function primaryContest(party, ab, active, ctx){
+  const s=primState(ab), ev=totalEV(ab), base={};
+  active.forEach(c=>{
+    const p=c.profile;
+    let u = 1.2*p.pop + .6*p.cha + .5*p.deb
+      + p.fund*(.4 + .8*clamp(ev/25,0,1))       // money matters most in big, expensive states
+      + p.est*(.3 + .08*ctx.day)                // the party consolidates behind insiders as the race goes on
+      + (CAUCUS.has(ab) ? 1.2*p.grass : 0)
+      + ctx.mom[c.id] + ctx.drift[c.id] + gauss(0,.35);
+    if(p.home===ab) u += 2;
+    base[c.id] = u;
+  });
+  const raw = Object.values(PRIMARY_BLOCS[party]).map(b=>[b, Math.max(.02, b.share(s))]);
+  const tot = raw.reduce((a,[,v])=>a+v,0);
+  const share={}; active.forEach(c=>share[c.id]=0);
+  const byBloc = raw.map(([b,v])=>{
+    const us = active.map(c=>base[c.id] + b.pull(c.profile) - b.w*Math.abs(c.profile.ideo-b.ideal));
+    const mx = Math.max(...us), ex = us.map(u=>Math.exp(PRIMARY_TEMP*(u-mx))), se = ex.reduce((a,x)=>a+x,0);
+    const bs={};
+    active.forEach((c,i)=>{ bs[c.id]=ex[i]/se; share[c.id] += (v/tot)*bs[c.id]; });
+    return {label:b.label, w:v/tot, bs};
+  });
+  const pct={}; active.forEach(c=>pct[c.id]=Math.round(1000*share[c.id])/10);
+  const winner = active.reduce((a,b)=>share[a.id]>=share[b.id]?a:b).id;
+  // the winner's signature bloc: biggest lead over the runner-up, weighted by bloc size
+  let topBloc=null, best=-Infinity;
+  byBloc.forEach(b=>{
+    const lead = (b.bs[winner] - Math.max(0,...active.filter(c=>c.id!==winner).map(c=>b.bs[c.id]))) * b.w;
+    if(lead>best){ best=lead; topBloc={label:b.label, share:b.bs[winner]}; }
+  });
+  return {pct, winner, topBloc};
+}
+
+/* Democrats: proportional above 15%. Republicans: winner-take-all over
+   50%, otherwise proportional above 20%. Largest-remainder rounding. */
+function allocateDelegates(party, pct, n){
+  const ids = Object.keys(pct).map(Number);
+  const top = ids.reduce((a,b)=>pct[a]>=pct[b]?a:b);
+  if(party==="R" && pct[top]>50) return {[top]:n};
+  let elig = ids.filter(i=>pct[i] >= (party==="D" ? 15 : 20));
+  if(!elig.length) elig=[top];
+  const tot = elig.reduce((a,i)=>a+pct[i],0), out={};
+  const raw = elig.map(i=>[i, n*pct[i]/tot]);
+  let used=0;
+  raw.forEach(([i,r])=>{ out[i]=Math.floor(r); used+=out[i]; });
+  raw.sort((a,b)=>(b[1]%1)-(a[1]%1)).slice(0,n-used).forEach(([i])=>out[i]++);
+  return out;
+}
+
+/* Runs the whole primary up front (momentum makes each contest depend on
+   the last); playback then reveals it a state at a time. */
+function simulatePrimary(party){
+  const cs=field[party], st={days:[], del:{}, drift:{}, active:cs.slice(), nominee:null, contested:false};
+  cs.forEach(c=>{ st.del[c.id]=0; st.drift[c.id]=0; });
+  st.needed = Math.floor(PRIMARY_CALENDAR.flatMap(d=>d.states).reduce((a,ab)=>a+primDelegates(party,ab),0)/2) + 1;
+  let clinched=false, prevWinner=null;
+  PRIMARY_CALENDAR.forEach((day,di)=>{
+    const res={results:[], events:[]};
+    if(!st.nominee){
+      const delTot = Object.values(st.del).reduce((a,b)=>a+b,0), mom={};
+      st.active.forEach(c=>{
+        st.drift[c.id] += gauss(0,.15);   // each campaign's fortunes wander week to week
+        mom[c.id] = (delTot ? 2*(st.del[c.id]/delTot - 1/st.active.length) : 0) + (c.id===prevWinner ? .3 : 0);
+      });
+      const dayWins={};
+      day.states.forEach(ab=>{
+        const r = primaryContest(party, ab, st.active, {day:di, mom, drift:st.drift});
+        r.ab=ab; r.n=primDelegates(party,ab); r.dels=allocateDelegates(party, r.pct, r.n);
+        for(const id in r.dels) st.del[id]+=r.dels[id];
+        dayWins[r.winner]=(dayWins[r.winner]||0)+1;
+        r.cum={...st.del};
+        res.results.push(r);
+      });
+      prevWinner = +Object.keys(dayWins).sort((a,b)=>dayWins[b]-dayWins[a])[0];
+      const leader = st.active.reduce((a,b)=>st.del[a.id]>=st.del[b.id]?a:b);
+      if(st.del[leader.id] >= st.needed){
+        st.active.filter(c=>c!==leader).forEach(c=>res.events.push({type:"drop", c}));
+        res.events.push({type:"clinch", c:leader});
+        st.active=[leader]; st.nominee=leader; clinched=true;
+      }else if(di>=3){   // hopeless campaigns quit after South Carolina, trailing ones after Super Tuesday
+        const cut = di>=5 ? .35 : .12;
+        const drops = st.active.filter(c=>c!==leader && st.del[c.id] < cut*st.del[leader.id]);
+        drops.forEach(c=>res.events.push({type:"drop", c}));
+        st.active = st.active.filter(c=>!drops.includes(c));
+        if(st.active.length===1){ st.nominee=leader; res.events.push({type:"presumptive", c:leader}); }
+      }
+    }else{
+      // the presumptive nominee runs unopposed in the remaining contests
+      const id=st.nominee.id;
+      day.states.forEach(ab=>{
+        const n=primDelegates(party,ab);
+        st.del[id]+=n;
+        res.results.push({ab, n, winner:id, pct:{[id]:100}, dels:{[id]:n}, uncontested:true, cum:{...st.del}});
+      });
+      if(!clinched && st.del[id]>=st.needed){ res.events.push({type:"clinch", c:st.nominee}); clinched=true; }
+    }
+    st.days.push(res);
+  });
+  if(!st.nominee){   // nobody reached a majority: the convention picks the delegate leader
+    st.nominee = st.active.reduce((a,b)=>st.del[a.id]>=st.del[b.id]?a:b);
+    st.contested = true;
+  }
+  return st;
+}
+
+/* ================= PRIMARIES — PLAYBACK ================= */
+const PRIM_COLORS = { D:["#2e6fd8","#14b8a6","#8b5cf6","#38bdf8","#6366f1"], R:["#d63c3c","#f97316","#db2777","#ca8a04","#9f1239"] };
+const otherParty = s => s==="D" ? "R" : "D";
+let prim=null, primParty="D", primPaths=null, primSteps=[], primStep=0, primTimer=null;
+let primSkipping=false, primFast=false, primDone=false, primSettled=false;
+const primQuiet = () => primSkipping || primFast;   // no pauses, chimes or per-contest chatter
+const primShown={}, primDel={}, primWins={}, primOut=new Set();
+
+function startPrimaries(){
+  primParty = mode;
+  const s=primParty, os=otherParty(s), opp=field[os][0];
+  field[s].forEach((c,i)=>{ c.color=PRIM_COLORS[s][i]; primDel[c.id]=0; primWins[c.id]=0; });
+  prim = simulatePrimary(s);
+
+  document.getElementById("setup").classList.add("hidden");
+  document.getElementById("primary").classList.remove("hidden");
+  document.getElementById("primTitle").textContent = PARTY_NAME[s]+" Primary";
+  document.getElementById("primYear").textContent = year;
+  document.getElementById("primPanel").classList.add(s==="D"?"dem":"gop");
+  document.getElementById("oppPanel").classList.add(os==="D"?"dem":"gop");
+  document.getElementById("primHead").textContent = `${field[s].length} candidates · ${fmt(prim.needed)} delegates to win`;
+  document.getElementById("primCands").innerHTML = field[s].map(c=>
+    `<div class="pc" id="pc-${c.id}">
+      ${c.thumb ? `<img class="ph" src="${c.thumb}" alt="">` : `<div class="ph">${esc(initial(c.name))}</div>`}
+      <div class="pn"><i class="sw" style="background:${c.color}"></i>${esc(c.name)}<span class="ps"></span></div>
+      <div class="pd">0</div>
+      <div class="pbar"><i style="background:${c.color}"></i></div>
+    </div>`).join("");
+  document.getElementById("oppCard").innerHTML =
+    `<div class="opp">
+      ${opp.thumb ? `<img class="ph" src="${opp.thumb}" alt="">` : `<div class="ph">${esc(initial(opp.name))}</div>`}
+      <div>
+        <div class="nm">${esc(opp.name)}</div>
+        <div class="pty" style="color:var(--${os==="D"?"dem":"gop"}-lt)">${PARTY_NAME[os].toUpperCase()} NOMINEE</div>
+        <div class="note">Faces the winner of this primary on election night.</div>
+      </div>
+    </div>`;
+  updatePrimPanel();
+  renderPrimLegend();
+  initAudio();
+
+  primSteps=[];
+  PRIMARY_CALENDAR.forEach((day,di)=>{
+    primSteps.push({type:"day", di});
+    day.states.forEach(ab=>primSteps.push({type:"state", di, ab}));
+    primSteps.push({type:"wrap", di});
+  });
+
+  drawUSMap("#pmap", showPrimTip).then(paths=>{
+    primPaths = paths;
+    recolorPrimMap();
+    ticker(`The ${year} ${PARTY_NAME[s]} primary is underway: ${field[s].length} candidates are in the running, and the winner faces ${opp.name} in November. Iowa votes first.`);
+    primTimer = setTimeout(primNext, 1500);
+  });
+}
+
+function primNext(){
+  const wait = primNextStep();
+  if(wait>=0) primTimer = setTimeout(primNext, primFast ? 0 : wait/speed);
+}
+/* one playback step; returns ms to wait before the next, or -1 when done */
+function primNextStep(){
+  if(primDone) return -1;
+  if(primStep>=primSteps.length){ primFinish(); return -1; }
+  const st=primSteps[primStep++], day=PRIMARY_CALENDAR[st.di];
+  if(st.type==="day"){
+    document.getElementById("primDate").textContent = `${day.date.toUpperCase()} · ${day.label.toUpperCase()}`;
+    return 700;
+  }
+  if(st.type==="state"){ revealPrimState(st.di, st.ab); return day.states.length>1 ? 450 : 1500; }
+  wrapPrimDay(st.di);
+  // nominee known: run the remaining (uncontested) contests quickly so the map and delegate count complete
+  if(primSettled) primFast = true;
+  return 2600;
+}
+
+function skipPrimaries(){
+  if(primDone) return;
+  clearTimeout(primTimer);
+  primSkipping = true;
+  while(primNextStep()>=0);
+}
+
+function revealPrimState(di, ab){
+  const r = prim.days[di].results.find(x=>x.ab===ab);
+  primShown[ab]=r;
+  Object.assign(primDel, r.cum);
+  primWins[r.winner]++;
+  updatePrimPanel();
+  if(primPaths) primPaths.filter(f=>mapAb(f)===ab).attr("fill", primFill(ab));
+  if(PRIMARY_CALENDAR[di].states.length===1 && !r.uncontested && !primQuiet())
+    ticker(`${(STATES[ab]||TERRITORIES[ab]).n.toUpperCase()}: ${candById(r.winner).name} wins the ${PARTY_NAME[primParty]} ${CAUCUS.has(ab)?"caucuses":"primary"} with ${r.pct[r.winner].toFixed(1)}%.`);
+}
+
+function wrapPrimDay(di){
+  const day=PRIMARY_CALENDAR[di], res=prim.days[di], pname=PARTY_NAME[primParty];
+  const contested=res.results.filter(r=>!r.uncontested);
+  if(contested.length){
+    const wins={}, gained={};
+    contested.forEach(r=>{
+      wins[r.winner]=(wins[r.winner]||0)+1;
+      for(const id in r.dels) gained[id]=(gained[id]||0)+r.dels[id];
+    });
+    const top = +Object.keys(wins).sort((a,b)=>wins[b]-wins[a] || (gained[b]||0)-(gained[a]||0))[0], c=candById(top);
+    const tally = contested.length>1 ? `wins ${wins[top]} of ${contested.length} contests` : "wins";
+    document.getElementById("primfeed").insertAdjacentHTML("afterbegin",
+      `<div class="call-item" style="border-left-color:${c.color}"><b>${esc(day.label)}</b>
+       <span class="t">${day.date} · ${esc(c.name)} ${tally} · +${gained[top]||0} delegates</span></div>`);
+    if(!primQuiet()){
+      if(contested.length>1) ticker(`${day.label.toUpperCase()}: ${c.name} carries ${wins[top]} of ${contested.length} contests and adds ${gained[top]||0} delegates.`);
+      const big = contested.reduce((a,b)=>b.n>a.n?b:a);   // exit-poll color from the day's biggest prize
+      if(big.topBloc) ticker(`Exit polls in ${(STATES[big.ab]||TERRITORIES[big.ab]).n}: ${candById(big.winner).name} took ${Math.round(big.topBloc.share*100)}% of ${big.topBloc.label}.`);
+    }
+  }
+  for(const ev of res.events){
+    if(ev.type==="drop"){ primOut.add(ev.c.id); ticker(`${ev.c.name} suspends their ${pname} campaign.`); }
+    if(ev.type==="presumptive"){ primSettled=true; ticker(`With the field cleared, ${ev.c.name} is the presumptive ${pname} nominee.`); }
+    if(ev.type==="clinch"){ primSettled=true; ticker(`${ev.c.name} clinches the ${pname} nomination with ${fmt(primDel[ev.c.id])} delegates!`); }
+  }
+  updatePrimPanel();
+  if(!primQuiet()) chime();
+}
+
+function primFinish(){
+  if(primDone) return;
+  primDone=true;
+  clearTimeout(primTimer);
+  const s=primParty, os=otherParty(s);
+  if(!primSettled && prim.contested)
+    ticker(`No ${PARTY_NAME[s]} candidate reached ${fmt(prim.needed)} delegates — at a contested convention, ${prim.nominee.name} wins the nomination on the second ballot.`);
+  primSettled=true;
+  cand[s] = prim.nominee; cand[os] = field[os][0];
+  updatePrimPanel();
+  document.getElementById("primDate").textContent = "NOMINEE CHOSEN";
+  document.getElementById("primSkip").classList.add("hidden");
+  document.getElementById("primGo").classList.remove("hidden");
+  document.getElementById("nomPair").innerHTML = ["D","R"].map(p=>{
+    const c=cand[p];
+    const line = p===s
+      ? `Won the primary · ${fmt(primDel[c.id])} delegates · ${primWins[c.id]} contests${prim.contested ? " · at a contested convention" : ""}`
+      : "Nominee";
+    return `<div class="nom">
+      ${c.thumb ? `<img src="${c.thumb}" alt="">` : `<div class="headshot">${esc(initial(c.name))}</div>`}
+      <div class="wn">${esc(c.name)}</div>
+      <div class="wp" style="color:var(--${p==="D"?"dem":"gop"}-lt)">${p==="D"?"DEMOCRAT":"REPUBLICAN"}</div>
+      <div class="nd">${line}</div>
+    </div>`;
+  }).join("");
+  setTimeout(()=>{ document.getElementById("nominees").classList.add("show"); fanfare(); }, primSkipping ? 0 : 1500);
+}
+
+function updatePrimPanel(){
+  field[primParty].slice().sort((a,b)=>primDel[b.id]-primDel[a.id]).forEach((c,i)=>{
+    const row=document.getElementById("pc-"+c.id), del=primDel[c.id];
+    const nom = primSettled && prim.nominee===c, out = primOut.has(c.id);
+    row.style.order = i;
+    row.classList.toggle("nom", nom);
+    row.classList.toggle("out", out);
+    row.querySelector(".ps").textContent =
+      nom ? (primDone ? "NOMINEE ✓" : "PRESUMPTIVE NOMINEE")
+      : out ? "WITHDRAWN" : primWins[c.id] ? `${primWins[c.id]} WON` : "";
+    row.querySelector(".pd").textContent = fmt(del);
+    row.querySelector(".pbar i").style.width = Math.min(100, 100*del/prim.needed)+"%";
+  });
+}
+
+function primFill(ab){
+  const r=primShown[ab];
+  return r ? candById(r.winner).color : "var(--tossup)";
+}
+function recolorPrimMap(){ if(primPaths) primPaths.attr("fill", f=>primFill(mapAb(f))); }
+function renderPrimLegend(){
+  document.getElementById("primLegend").innerHTML =
+    field[primParty].map(c=>`<span><i style="background:${c.color}"></i>${esc(c.name).toUpperCase()}</span>`).join("") +
+    `<span><i style="background:var(--tossup)"></i>NOT YET VOTED</span>`;
+}
+
+function showPrimTip(e,ab){
+  const st=STATES[ab]||TERRITORIES[ab], r=primShown[ab];
+  const day=PRIMARY_CALENDAR.find(d=>d.states.includes(ab));
+  let body;
+  if(!r) body = `<div class="rep">Votes ${day.date} (${day.label}) · ${primDelegates(primParty,ab)} delegates</div>`;
+  else if(r.uncontested) body = `<div class="tr"><span style="color:${candById(r.winner).color};font-weight:700">✓ ${esc(candById(r.winner).name)}</span><span>uncontested · ${r.n} del.</span></div>`;
+  else body = Object.keys(r.pct).sort((a,b)=>r.pct[b]-r.pct[a]).map(id=>{
+      const c=candById(+id);
+      return `<div class="tr"><span style="color:${c.color};font-weight:700">${+id===r.winner?"✓ ":""}${esc(c.name)}</span><span>${r.pct[id].toFixed(1)}% · ${r.dels[id]||0} del.</span></div>`;
+    }).join("") +
+    (r.topBloc ? `<div class="rep">📊 ${esc(candById(r.winner).name)} won ${Math.round(r.topBloc.share*100)}% of ${r.topBloc.label}</div>` : "") +
+    `<div class="rep">${day.date} · ${day.label} · ${r.n} delegates</div>`;
+  const tip=document.getElementById("tooltip");
+  tip.innerHTML = `<h4>${st.n} — ${PARTY_NAME[primParty]} ${CAUCUS.has(ab)?"caucuses":"primary"}</h4>` + body;
+  tip.style.display="block";
+  const x=Math.min(e.clientX+16, innerWidth-240), y=Math.min(e.clientY+16, innerHeight-140);
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+
 /* ================= CONTROLS ================= */
 function toggleSpeed(){
   speed = speed===1?4:1;
-  document.getElementById("speedBtn").textContent = "SPEED "+speed+"×";
-  document.getElementById("speedBtn").classList.toggle("on", speed===4);
+  document.querySelectorAll(".speed-btn").forEach(b=>{
+    b.textContent = "SPEED "+speed+"×";
+    b.classList.toggle("on", speed===4);
+  });
 }
 function toggleMute(){
   muted=!muted;
-  const b=document.getElementById("muteBtn");
-  b.textContent = muted?"🔇 MUTED":"🔊 SOUND";
-  b.classList.toggle("on",!muted);
+  document.querySelectorAll(".mute-btn").forEach(b=>{
+    b.textContent = muted?"🔇 MUTED":"🔊 SOUND";
+    b.classList.toggle("on",!muted);
+  });
 }
 </script>
 </body>

@@ -5,6 +5,7 @@
 # 🏛️ DECISION NIGHT
 ### *Fictional Character Presidential Election Simulator & Live Broadcast Engine*
 
+[![Version](https://img.shields.io/badge/Version-2.0.0-007ec6?style=for-the-badge&logo=git&logoColor=white)](https://github.com/Noorhorse01/election-simulator/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![D3.js](https://img.shields.io/badge/D3.js-v7-F9A03C?style=for-the-badge&logo=d3.js&logoColor=white)](https://d3js.org/)
@@ -13,11 +14,11 @@
 [![GitHub Pages](https://img.shields.io/badge/Deployment-GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://pages.github.com/)
 
 <p align="center">
-  <b>Simulate the race to 270 with any fictional character in cinematic, network-broadcast real time.</b><br>
-  Built with authentic election-desk graphics, demographic swing models, D3 choropleth maps, audio stingers, and AI character profiling.
+  <b>Simulate primary season, territory straw polls, and the race to 270 with any fictional character in cinematic, network-broadcast real time.</b><br>
+  Built with authentic election-desk graphics, delegate momentum models, D3 choropleth maps, audio stingers, and AI character profiling.
 </p>
 
-[🎮 **Launch Live Demo**](https://noorhorse01.github.io/election-simulator/) • [✨ **Features**](#-key-features) • [🧠 **Simulation Model**](#-simulation-engine--math) • [🚀 **GitHub Pages Deployment**](#-github-pages-deployment)
+[🚀 **Launch V2 (Primaries & Territories)**](https://noorhorse01.github.io/election-simulator/) • [🏛️ **Launch V1 (Classic 1-on-1)**](https://noorhorse01.github.io/election-simulator/v1.html) • [✨ **Features**](#-key-features) • [🧠 **Simulation Model**](#-simulation-engine--math)
 
 ---
 
@@ -25,9 +26,19 @@
 
 ## 🌟 Overview
 
-**Decision Night** transforms any hypothetical presidential matchup into a nail-biting, cable-news-style Election Night experience. Pit **Lisa Simpson against Ron Swanson**, **Tony Stark against Shrek**, or **Scrooge McDuck against Leslie Knope**.
+**Decision Night** transforms any hypothetical presidential matchup into a nail-biting, cable-news-style Election Night experience. Pit **Lisa Simpson against Ron Swanson**, **Tony Stark against Shrek**, or run an entire **5-candidate Democratic or Republican primary season** through Iowa, New Hampshire, Super Tuesday, and the territories!
 
-Watch real-time poll closings starting at 6:00 PM Eastern, live county/state counting speeds, breaking-news projection banners with authentic three-note synthesizer chimes, shifting electoral bars toward the golden 270 threshold, and state-by-state demographic exit-poll analysis.
+Watch real-time primary delegate counts, territory straw poll results, poll closings starting at 6:00 PM Eastern, breaking-news projection banners with authentic synthesizer chimes, shifting electoral bars toward the golden 270 threshold, and state-by-state demographic exit-poll analysis.
+
+---
+
+## 🔥 What's New in V2
+
+- 🗳️ **Full Presidential Primary Season**: Compete in multi-candidate Democratic or Republican primaries (2 to 5 contenders). Features state-by-state contest calendars, cumulative delegate counts, and contested convention scenarios.
+- 📈 **Dynamic Primary Momentum Engine**: Early victories in Iowa and New Hampshire trigger media buzz and momentum multipliers into Super Tuesday.
+- 🏝️ **Territory Delegates & Straw Polls**: Real delegate allocation and results for **Puerto Rico (PR), Guam (GU), U.S. Virgin Islands (VI), American Samoa (AS), and Northern Mariana Islands (MP)**.
+- 🏛️ **Unified Road to the White House**: Win your party's primary nomination, then advance to face the opposing party's nominee in the general election on Decision Night!
+- 🗂️ **Preserved Classic V1**: Prefer the classic 1-on-1 head-to-head general election mode? It's permanently available at [`v1.html`](https://noorhorse01.github.io/election-simulator/v1.html).
 
 ---
 
