@@ -113,19 +113,6 @@ npx serve .
 ```
 Navigate to `http://localhost:8000` in your browser.
 
----
-
-## 🌐 GitHub Pages Deployment
-
-This repository is pre-configured with a GitHub Actions workflow (`.github/workflows/pages.yml`). To make your election simulator live on the web:
-
-1. Push this repository to your GitHub account.
-2. In your repository on GitHub, navigate to **Settings** > **Pages**.
-3. Under **Build and deployment** > **Source**, select **GitHub Actions**.
-4. Your site will automatically build and publish at:
-   ```
-   https://<your-username>.github.io/<repository-name>/
-   ```
 
 ---
 
